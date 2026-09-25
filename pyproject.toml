@@ -1,0 +1,25 @@
+[project]
+name = "recruitement-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Srijan-Petwal", email = "srijan8a@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "black>=26.5.1",
+    "dotenv>=0.9.9",
+    "isort>=9.0.1",
+    "langchain>=1.4.2",
+    "langchain-google-genai>=4.4.0",
+    "langchain-tavily>=0.2.18",
+    "langgraph>=1.2.12",
+]
+
+[project.scripts]
+recruitement-agent = "recruitement_agent:main"
+
+[build-system]
+requires = ["uv_build>=0.12.11,<0.13.0"]
+build-backend = "uv_build"

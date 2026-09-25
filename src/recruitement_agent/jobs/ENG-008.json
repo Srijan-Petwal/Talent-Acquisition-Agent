@@ -1,0 +1,70 @@
+{
+  "job_id": "ENG-008",
+  "title": "Senior Software Engineer - Distributed Systems",
+  "department": "Core Platform Engineering",
+  "expected_experience_level": "senior",
+  "location": "Bangalore",
+  "status": "open",
+
+  "required_skills": [
+    "Java",
+    "Python",
+    "Distributed Systems",
+    "System Design",
+    "Data Structures and Algorithms",
+    "REST APIs",
+    "SQL",
+    "Git"
+  ],
+
+  "preferred_skills": [
+    "C++",
+    "Go",
+    "AWS",
+    "Kubernetes",
+    "Docker",
+    "Kafka",
+    "Redis",
+    "Microservices",
+    "Observability"
+  ],
+
+  "responsibilities": [
+    "Design and develop highly scalable distributed services supporting large production workloads.",
+    "Own architectural decisions for new and existing backend systems.",
+    "Design systems for high availability, fault tolerance, scalability, and operational reliability.",
+    "Identify and resolve complex performance and reliability issues across distributed services.",
+    "Lead technical design discussions and evaluate architectural trade-offs.",
+    "Work closely with product managers and engineers across multiple teams to deliver large-scale platform capabilities.",
+    "Establish engineering best practices for testing, deployment, monitoring, and operational excellence.",
+    "Mentor engineers through technical design reviews, code reviews, and architectural guidance."
+  ],
+
+  "description": "We are looking for a Senior Software Engineer to help design and build distributed platform services operating at significant scale. The role requires strong software engineering fundamentals, distributed systems knowledge, and the ability to own system architecture from design through production operation. The engineer will work across teams on technically complex problems involving scalability, reliability, performance, and long-term platform architecture.",
+
+  "urgency": "1-3months",
+
+  "expected_ctc": {
+    "currency": "INR",
+    "min_lpa": 35,
+    "max_lpa": 55
+  },
+
+  "joining_bonus": {
+    "eligible": true,
+    "amount": {
+      "currency": "INR",
+      "value": 500000
+    },
+    "required_employment_period_days": 730
+  },
+
+  "requested_by": {
+    "employee_id": "EMP-0418",
+    "employee_role": "Director of Engineering",
+    "employee_department": "Core Platform Engineering"
+  },
+
+  "created_at": "2026-09-26T12:00:00Z",
+  "updated_at": "2026-09-26T12:00:00Z"
+}

@@ -1,0 +1,71 @@
+{
+  "job_id": "ENG-009",
+  "title": "Senior Software Engineer - AI Infrastructure",
+  "department": "Machine Learning Platform",
+  "expected_experience_level": "senior",
+  "location": "Hyderabad",
+  "status": "open",
+
+  "required_skills": [
+    "Python",
+    "C++",
+    "Distributed Systems",
+    "System Design",
+    "Machine Learning Systems",
+    "REST APIs",
+    "Linux",
+    "Git"
+  ],
+
+  "preferred_skills": [
+    "PyTorch",
+    "Kubernetes",
+    "Docker",
+    "AWS",
+    "GPU Computing",
+    "LLM Inference",
+    "vLLM",
+    "TensorRT",
+    "CUDA",
+    "MLOps"
+  ],
+
+  "responsibilities": [
+    "Design and build scalable infrastructure for machine learning and generative AI workloads.",
+    "Develop high-performance services supporting model inference and model lifecycle workflows.",
+    "Design distributed systems capable of handling high-throughput and latency-sensitive AI workloads.",
+    "Optimize model-serving infrastructure for performance, reliability, and cost.",
+    "Work across software, infrastructure, and machine learning teams to integrate production AI systems.",
+    "Lead architecture and technical design for major AI platform initiatives.",
+    "Investigate complex performance bottlenecks across compute, networking, storage, and inference systems.",
+    "Mentor engineers and establish engineering standards for production machine learning infrastructure."
+  ],
+
+  "description": "We are looking for a Senior Software Engineer to build infrastructure supporting large-scale machine learning and generative AI applications. The role combines software engineering, distributed systems, machine learning infrastructure, and performance optimization. The engineer will work on systems that serve AI workloads at scale and will own significant architectural and technical decisions across the platform.",
+
+  "urgency": "immediate",
+
+  "expected_ctc": {
+    "currency": "INR",
+    "min_lpa": 40,
+    "max_lpa": 65
+  },
+
+  "joining_bonus": {
+    "eligible": true,
+    "amount": {
+      "currency": "INR",
+      "value": 600000
+    },
+    "required_employment_period_days": 730
+  },
+
+  "requested_by": {
+    "employee_id": "EMP-0527",
+    "employee_role": "Senior Engineering Manager",
+    "employee_department": "Machine Learning Platform"
+  },
+
+  "created_at": "2026-09-26T12:15:00Z",
+  "updated_at": "2026-09-26T12:15:00Z"
+}

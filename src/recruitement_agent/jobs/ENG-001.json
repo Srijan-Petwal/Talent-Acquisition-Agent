@@ -1,0 +1,60 @@
+{
+  "job_id": "ENG-001",
+  "title": "Software Engineer - Backend",
+  "department": "Engineering",
+  "expected_experience_level": "fresher",
+  "location": "Bangalore",
+  "status": "open",
+
+  "required_skills": [
+    "Python",
+    "FastAPI",
+    "REST APIs",
+    "SQL",
+    "Git"
+  ],
+
+  "preferred_skills": [
+    "Docker",
+    "AWS",
+    "MongoDB",
+    "Unit Testing"
+  ],
+
+  "responsibilities": [
+    "Develop and maintain backend services and REST APIs.",
+    "Implement scalable application features using Python and FastAPI.",
+    "Write unit tests and maintain code quality.",
+    "Work with databases to design and optimize data access.",
+    "Collaborate with frontend engineers and other members of the engineering team.",
+    "Participate in code reviews and contribute to technical documentation."
+  ],
+
+  "description": "We are looking for a Software Engineer to join our backend engineering team. The role is suitable for an early-career software engineer who is interested in developing backend services and APIs using Python. The candidate will work closely with experienced engineers to build, test, and maintain production software.",
+
+  "urgency": "15-20days",
+
+  "expected_ctc": {
+    "currency": "INR",
+    "min_lpa": 8,
+    "max_lpa": 12
+  },
+
+  "joining_bonus": {
+    "eligible": true,
+    "amount": {
+      "currency": "INR",
+      "value": 100000
+    },
+    "required_employment_period_days": 365
+  },
+
+  "requested_by": {
+    "employee_id": "EMP-1042",
+    "employee_role": "Engineering Manager",
+    "employee_department": "Backend Engineering"
+  },
+
+  "created_at": "2026-09-25T10:30:00Z",
+  "updated_at": "2026-09-25T10:30:00Z"
+}

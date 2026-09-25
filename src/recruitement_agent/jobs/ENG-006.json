@@ -1,0 +1,63 @@
+{
+  "job_id": "ENG-006",
+  "title": "Python Developer - Full Stack",
+  "department": "Product Engineering",
+  "expected_experience_level": "fresher",
+  "location": "Pune",
+  "status": "open",
+
+  "required_skills": [
+    "Python",
+    "FastAPI",
+    "JavaScript",
+    "React",
+    "REST APIs",
+    "SQL",
+    "Git"
+  ],
+
+  "preferred_skills": [
+    "Django",
+    "MongoDB",
+    "Docker",
+    "AWS",
+    "Unit Testing",
+    "CI/CD"
+  ],
+
+  "responsibilities": [
+    "Develop and maintain web application features using Python and React.",
+    "Build REST APIs using Python and FastAPI.",
+    "Develop reusable frontend components using React and JavaScript.",
+    "Work with relational and NoSQL databases to implement application functionality.",
+    "Write unit tests and participate in debugging and code reviews.",
+    "Integrate third-party APIs and internal services.",
+    "Collaborate with senior engineers to design and implement production features.",
+    "Follow Git-based development and software engineering best practices."
+  ],
+
+  "description": "We are looking for a Python Developer to join our product engineering team. The role is suitable for fresh graduates with strong programming fundamentals and an interest in full-stack web development. The engineer will work across Python backend services, REST APIs, React-based interfaces, databases, and cloud-ready application development.",
+
+  "urgency": "1-3months",
+
+  "expected_ctc": {
+    "currency": "INR",
+    "min_lpa": 6,
+    "max_lpa": 10
+  },
+
+  "joining_bonus": {
+    "eligible": false,
+    "amount": null,
+    "required_employment_period_days": null
+  },
+
+  "requested_by": {
+    "employee_id": "EMP-1136",
+    "employee_role": "Engineering Manager",
+    "employee_department": "Product Engineering"
+  },
+
+  "created_at": "2026-09-26T11:00:00Z",
+  "updated_at": "2026-09-26T11:00:00Z"
+}
