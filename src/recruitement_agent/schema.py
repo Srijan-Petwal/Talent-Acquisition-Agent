@@ -2,7 +2,7 @@ from typing import List,Literal,Dict,Optional
 from pydantic import BaseModel, Field
 from typing_extensions import TypedDict
 from langchain_core.messages import AnyMessage
-
+from langchain_core.documents import Document
 
 
 
@@ -21,3 +21,4 @@ class ExperienceCategoryResponse(BaseModel):
 class RecruitmentState(TypedDict):
     messages:List[AnyMessage]
     experience:Optional[ExperienceCategoryResponse]
+    retrieved_jobs:List[Document]
