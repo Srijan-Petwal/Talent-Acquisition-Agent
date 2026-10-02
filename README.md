@@ -1,136 +1,217 @@
 # Talent Acquisition Agent
 
-AI-assisted recruitment workflow built with **Python, LangChain/LangGraph, Gemini, OpenRouter, and Pinecone**.
+AI-assisted recruitment workflow built with **Python, LangChain, LangGraph, Gemini, OpenRouter, and Pinecone**.
 
 ## What it does
 
-The project explores how AI can support talent acquisition by converting candidate information into structured experience signals and preparing job data for semantic retrieval.
+The project explores how AI can support talent acquisition by analyzing candidate profiles, retrieving suitable job openings, evaluating skill alignment, calculating match scores, and routing candidates through recruitment workflows.
 
-**Candidate flow:** Candidate Profile → Gemini 3.1 Flash Lite → Structured Experience Category → Recruitment State
+**Candidate flow:**
 
-**Job flow:** Job JSON → LangChain Documents → OpenRouter/NVIDIA Embeddings → Pinecone → Semantic Retrieval
+Candidate Profile → Experience Classification → Job Retrieval → Skill Assessment → Match Score → Recruitment Decision
 
-The current implementation focuses on the **experience-categorization agent** and the **job ingestion/vector-retrieval foundation**, with the architecture designed to be extended into a larger recruitment workflow.
+**Job flow:**
+
+Job JSON → LangChain Documents → NVIDIA Nemotron Embed 1B via OpenRouter → Pinecone → Semantic Retrieval
+
+The current implementation covers the **core LangGraph recruitment workflow**, with a React frontend and FastAPI API layer planned next.
 
 ## Architecture
 
 ```text
                     TALENT ACQUISITION AGENT
 
- Candidate Profile                         Job Records
-       │                                       │
-       ▼                                       ▼
- Gemini 3.1 Flash Lite                  Document Preparation
-       │                                       │
-       ▼                                       ▼
- Pydantic Structured Output             NVIDIA Nemotron Embed 1B
-       │                                 (via OpenRouter)
-       ▼                                       │
- RecruitmentState                              ▼
-       │                                    Pinecone
-       │                                       │
-       └──────────────► Matching / Retrieval ◄─┘
-                              │
-                              ▼
-                    Recruitment Workflow
+                     Candidate Profile
+                            │
+                            ▼
+                categorize_experience
+                            │
+                     Gemini 3.1 Flash Lite
+                            │
+                            ▼
+                  Experience Category
+                            │
+                            ▼
+                     retrieve_jobs
+                            │
+                     Pinecone Search
+                            │
+                            ▼
+                     Retrieved Jobs
+                            │
+                            ▼
+                     assess_skills
+                            │
+                     Gemini 3.1 Flash Lite
+                            │
+                            ▼
+                   Skill Assessments
+                            │
+                            ▼
+                calculate_match_score
+                            │
+                     Python Scoring
+                            │
+                            ▼
+                     final_verdict
+                            │
+              ┌─────────────┼─────────────┐
+              ▼             ▼             ▼
+           Reject       Recruiter     Assessment
+                        Review
+              └─────────────┼─────────────┘
+                            ▼
+                     WorkflowResult
 ```
 
-### ingestion & indexing pipeline architecture
-```
-                        SOURCE OF TRUTH
-                       MongoDB / PostgreSQL
-                              │
-                              │
-                     ┌────────▼────────┐
-                     │ Job JSON/model  │
-                     └────────┬────────┘
-                              │
-                       ingestion pipeline
-                              │
-                 ┌────────────┴────────────┐
-                 │                         │
-                 ▼                         ▼
-          searchable text             metadata
-                 │                         │
-                 ▼                         ▼
-             embedding                structured
-                 │                         │
-                 └────────────┬────────────┘
-                              ▼
-                           Pinecone
-                              │
-                    ┌─────────┴─────────┐
-                    │                   │
-             metadata filter       semantic search
-                    │                   │
-                    └─────────┬─────────┘
-                              ▼
-                       retrieve_jobs
-                              │
-                              ▼
-                      assess_skills
-```
+## Job Ingestion & Retrieval
 
-### Recruitement Workflow
-```
-                    Candidate
-                        ↓
-             categorize_experience
-                        ↓
-                 experience category
-                        ↓
-             retrieve matching jobs
-                        ↓
+```text
+                     Job JSON
+                        │
+                        ▼
+                LangChain Document
+                        │
               ┌─────────┴─────────┐
-              ↓                   ↓
-        Fresher jobs        Experienced jobs
-              ↓                   ↓
-              └─────────┬─────────┘  
-                  assess_skills
-                        ↓
-             ┌──────────┼──────────┐
-             ↓          ↓          ↓
-           reject     escalate   interview
-              └─────────┬─────────┘
-                       END        
+              │                   │
+              ▼                   ▼
+       Searchable Text         Metadata
+              │                   │
+              ▼                   │
+     NVIDIA Nemotron Embed 1B     │
+        via OpenRouter            │
+              │                   │
+              └────────┬──────────┘
+                       ▼
+                    Pinecone
+                       │
+              Semantic Search
+              + Metadata Filter
+                       │
+                       ▼
+                 retrieve_jobs
 ```
 
-## Repository
+Jobs are currently stored as JSON records and indexed in Pinecone. Retrieval filters jobs by **experience level** and **open status**, followed by semantic similarity search.
 
-https://github.com/Srijan-Petwal/Talent-Acquisition-Agent
+## Recruitment Workflow
 
-## How the agent works
+```text
+Candidate
+    ↓
+categorize_experience
+    ↓
+retrieve_jobs
+    ↓
+assess_skills
+    ↓
+calculate_match_score
+    ↓
+final_verdict
+    │
+    ├──────────────┬───────────────────┐
+    ▼              ▼                   ▼
+ Reject     Recruiter Review      Assessment
+```
 
-1. A candidate profile is passed into the recruitment workflow.
-2. The Gemini-powered agent determines whether the candidate is **fresher, experienced, or senior**.
-3. The response is validated using a Pydantic schema containing `category`, `confidence_score`, and `sources`.
-4. Job records are converted into searchable LangChain Documents.
-5. Job documents are embedded using **NVIDIA Nemotron Embed 1B** through OpenRouter.
-6. Embeddings are stored in **Pinecone**, providing a semantic retrieval layer for future matching and recruitment workflows.
+Each retrieved job is evaluated independently using LangGraph's dynamic routing.
 
-The agent is instructed to use evidence from the profile and avoid inventing missing experience.
+## How the Agent Works
+
+1. The candidate profile is classified as **fresher, experienced, or senior** using Gemini 3.1 Flash Lite.
+2. The response is validated using a Pydantic schema with `category`, `confidence_score`, and `sources`.
+3. Relevant open jobs are retrieved from Pinecone using semantic search and experience-level filtering.
+4. Each retrieved job is assessed independently for **required** and **preferred** skills.
+5. Skills are classified as `matched`, `partially_matched`, or `missing` using explicit evidence from the candidate profile.
+6. A deterministic Python function calculates the match score.
+7. The workflow combines the score with the LLM recommendation and routes the job to rejection, recruiter review, or assessment.
+8. Each branch produces a structured `WorkflowResult` for future frontend use.
+
+## Match Scoring
+
+Partial matches receive **50% credit**.
+
+```text
+Required Coverage
+= (Matched + 0.5 × Partial) / Total Required Skills
+
+Preferred Coverage
+= (Matched + 0.5 × Partial) / Total Preferred Skills
+
+Final Score
+= 100 × (0.70 × Required Coverage + 0.30 × Preferred Coverage)
+```
+
+When a job has no preferred skills, the required-skill coverage contributes the full score.
 
 ## Tech Stack
 
 **Python • LangChain • LangGraph • Gemini 3.1 Flash Lite • Pydantic • OpenRouter • NVIDIA Nemotron Embed 1B • Pinecone • uv**
 
+**Frontend (in progress):** React • Vite • Tailwind CSS
+
+**API layer (planned):** FastAPI • REST/JSON
+
 ## Project Structure
 
 ```text
-src/recruitement_agent/
-├── main.py
-├── categorize_experience.py
-├── ingestion.py
-├── schema.py
-├── PROMPT.py
-└── ...
+recruitement_agent/
+├── src/
+│   └── recruitement_agent/
+│       ├── main.py
+│       ├── graph.py
+│       ├── schema.py
+│       ├── PROMPT.py
+│       ├── categorize_experience.py
+│       ├── retrieve_jobs.py
+│       ├── assess_skills.py
+│       ├── match_score_calculations.py
+│       ├── ingestion.py
+│       └── jobs/
+│           ├── ENG-001.json
+│           ├── ENG-002.json
+│           └── ...
+│
+├── frontend/
+│   └── React + Vite application
+│
+├── .env
+├── .gitignore
+├── .python-version
+├── pyproject.toml
+├── README.md
+└── uv.lock
 ```
 
-- `categorize_experience.py` — AI experience-classification agent
-- `schema.py` — structured recruitment state and response schema
-- `PROMPT.py` — categorization instructions
+- `graph.py` — LangGraph workflow and routing
+- `schema.py` — recruitment state and structured response schemas
+- `categorize_experience.py` — experience classification
+- `retrieve_jobs.py` — Pinecone job retrieval
+- `assess_skills.py` — per-job skill assessment
+- `match_score_calculations.py` — deterministic match scoring
 - `ingestion.py` — job-document creation and Pinecone ingestion
-- `main.py` — runnable example / entry point
+- `PROMPT.py` — LLM prompts
+- `main.py` — local workflow execution/testing
+
+## Current Progress
+
+- [x] Experience classification
+- [x] Job ingestion and Pinecone indexing
+- [x] Semantic job retrieval
+- [x] Skill assessment
+- [x] Deterministic match scoring
+- [x] Recommendation and dynamic routing
+- [x] Structured workflow results
+- [x] End-to-end workflow testing
+- [ ] FastAPI backend
+- [ ] React + Vite frontend
+- [ ] Candidate View
+- [ ] Recruiter View
+- [ ] Deployment
+
+## Repository
+
+[GitHub Repository](https://github.com/Srijan-Petwal/Talent-Acquisition-Agent)
 
 ## Setup
 
@@ -140,10 +221,6 @@ cd Talent-Acquisition-Agent
 uv sync
 ```
 
-Create a local `.env` with the required **Gemini, OpenRouter, and Pinecone** credentials/configuration used by the project.
+Create a local `.env` file with the required **Gemini, OpenRouter, and Pinecone** credentials.
 
-Then run the relevant Python module with `uv run`.
-
-
-
-
+Then run the Python workflow using `uv run`.

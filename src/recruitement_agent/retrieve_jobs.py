@@ -32,7 +32,7 @@ def retrieve_jobs(state: RecruitmentState) -> RecruitmentState:
 
     jobs_by_category = vectorstore.similarity_search(
         query=candidate_query,
-        k=5,
+        k=2,
         filter={
             "expected_experience_level": experience,
             "status":"open"
