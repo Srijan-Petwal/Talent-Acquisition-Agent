@@ -2,8 +2,6 @@
 
 <p align="center">
   AI-assisted recruitment workflow built with <b>Python, LangChain, LangGraph, Gemini, OpenRouter, and Pinecone</b>.
-I feel that finding your first role in tech shouldn't feel like sending resumes into a black box. My latest project is a multi-agent Talent Acquisition workflow that supports and smoothens the process of hiring for both the candidate and the recruiter by providing llm-powered capabilities like analyzing candidate profiles, retrieving suitable job openings, evaluating skill alignment, calculating match scores, and routing candidates through recruitment workflows. Further aim is to built a enterprise-grade platform that provides transparency in the hiring process, cuts down application timings by a significant margin, reduces workload on the recruiters and provide intelligent recommendations for next steps based on candidate profile. I would regard it as my 'great try' at dismantling the friction between emerging talent and hiring companies.
-
 </p>
 
 <p align="center">
@@ -18,7 +16,7 @@ I feel that finding your first role in tech shouldn't feel like sending resumes 
 
 ## 🎯 What it does
 
-The project explores how AI can support talent acquisition by analyzing candidate profiles, retrieving suitable job openings, evaluating skill alignment, calculating match scores, and routing candidates through recruitment workflows.
+<em>I feel that <b>finding your first role in tech shouldn't feel like sending resumes into a black box</b>.</em> My latest project is a multi-agent Talent Acquisition workflow that supports and smoothens the process of hiring for both the candidate and the recruiter by providing llm-powered capabilities like analyzing candidate profiles, retrieving suitable job openings, evaluating skill alignment, calculating match scores, and routing candidates through recruitment workflows. Further aim is to built a enterprise-grade platform that provides transparency in the hiring process, cuts down application timings by a significant margin, reduces workload on the recruiters and provide intelligent recommendations for next steps based on candidate profile. I would regard it as my <b>'great try'</b> at dismantling the friction between emerging talent and hiring companies.
 
 ### Expected Agentic Talent Acquisition Workflow Showcase
 
